@@ -1,0 +1,101 @@
+﻿@model JobOffersWebsite.Models.Job
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section class="container create-job py-5 my-5">
+
+    @using (Html.BeginForm("Create", "Jobs", FormMethod.Post, new { enctype="multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Create New Job</h4>
+            <hr />
+            <div class="alert alert-danger" id="error-div" style="display:none;">
+                <span id="view-error">
+
+                </span>
+            </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.JobTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.JobTitle, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.JobTitle, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.JobContent, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.JobContent, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.JobContent, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.JobImage, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="file" name="uploadedImage" id="uploaded-image"/>
+
+                    @Html.ValidationMessageFor(model => model.JobImage, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CategoryId, "Job Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" id="save" class="btn btn-outline-info mr-4" />
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+                </div>
+            </div>
+        </div>
+    }
+
+</section>
+
+@section scripts{
+    <script>
+        $(function () {
+            $("#save").click(function () {
+
+                // Check if the image is not null
+                if ($("#uploaded-image").val() == "") {
+                    $("#error-div").fadeIn();
+                        $("#view-error").remove();
+                        $("#error-div").append('<span id="view-error">Please Choose an image</span>');
+                        return false;
+                }
+                else {
+                    // Check if the image extension is valid
+                    var fileName = document.getElementById("uploaded-image").value;
+                    var extension = fileName.substr(fileName.lastIndexOf(".") + 1);
+                    var validExtensions = ['jpg', 'jpeg', 'png', 'gif', 'tif', 'bmp'];
+                    if ($.inArray(extension, validExtensions) == -1) {
+                        $("#error-div").fadeIn();
+                        $("#view-error").remove();
+                        $("#error-div").append('<span id="view-error">Choose an image with valid extension</span>');
+                        return false;
+                    }
+                    var fileSize = document.getElementById("uploaded-image").files[0].size / 1024 / 1024;
+                    if (fileSize > 2) {
+                        $("#error-div").fadeIn();
+                        $("#view-error").remove();
+                        $("#error-div").append('<span id="view-error">Choose an image with less than 2 MB</span>');
+                        return false;
+                    }
+                }
+            });
+        });
+    </script>
+}

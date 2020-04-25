@@ -1,0 +1,46 @@
+﻿@model IEnumerable<JobOffersWebsite.Models.Job>
+
+
+<section class="latest-jobs pt-5 mt-5">
+    <h1>Search Results</h1>
+    <div class="container pt-5 mt-5">
+        <div class="row">
+            @foreach (var item in Model)
+            {<div class="container">
+                    <div class="row job-card mb-3 py-3">
+                        <div class="col-md-3">
+                            <img class="img-fluid img-thumbnail" src="~/Uploads/@Html.DisplayFor(m=>item.JobImage)" />
+                        </div>
+                        <div class="col-md-9 pt-3">
+                            <h5>Part Time</h5>
+                            <h3>@Html.DisplayFor(m => item.JobTitle)</h3>
+                            <br />
+                            <p>@item.User.UserName - Posted 6 months ago</p>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p>Location: 9 Remsen St Brooklyn, NY</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p>Category: @item.Category.CategoryType</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p>Salary: $18 - $25 per hour</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    @Html.ActionLink("Show Details", "Details", new { jobId = item.Id }, new { @class = "btn btn-secondary mr-3" })
+                                    @Html.ActionLink("Apply For Job", "Apply", new { jobId = item.Id }, new { @class = "btn btn-success mr-3" })
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="text-center py-5">
+        <a href="/jobs" class="">Browse Job Full List</a>
+    </div>
+</section>

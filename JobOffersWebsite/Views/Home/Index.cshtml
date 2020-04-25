@@ -1,0 +1,169 @@
+﻿@model JobOffersWebsite.ViewModels.JobCategoryViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<section class="header-body">
+    <div class="header-layout">
+        <div class="container text-center pt-5">
+            <div class="head-text pt-5 mt-5">
+                <h1 class="pt-5 mt-5">Million Offers Waiting for You !</h1>
+                <p class="m-auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+            </div>
+
+            <div class="pt-4">
+                <form class="">
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" class="form-control-lg" placeholder="Job Title Keyword">
+                        </div>
+                        <div class="col">
+                            <select class="form-control-lg">
+                                <option>Accounting & Finances</option>
+                                <option>Education & Training</option>
+                                <option>Grapihcs Design</option>
+                                <option>Health & Hospital</option>
+                                <option>Website & Software</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control-lg" placeholder="Location">
+                        </div>
+                        <div class="col">
+                            <input type="submit" class="btn-lg btn-warning px-5" value="Find Jobs" />
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="job-categories-head pt-5">
+    <div class="container clearfix">
+        <div class="float-left">
+            <h2>Browse Jobs by Category</h2>
+        </div>
+        <div class="float-right pt-5">
+            <a href="/Categories" class="float-right">Browse Category Full List</a>
+        </div>
+    </div>
+
+    <div class="container-fluid px-5 py-5">
+        <div class="row">
+            @foreach (var item in Model.Categories)
+            {   <div class="col category-card">
+                    <a class="" href="/jobs/GetCategories/@item.Id">
+                            <span class="fi-minus"></span>
+                            <h5>@Html.DisplayFor(m => item.CategoryType)</h5>
+                            <p>@Html.DisplayFor(m => item.CategoryDescription)</p>
+                            <button class="btn btn-outline-warning">@Html.DisplayFor(m => item.Jobs.Count) Open Positions</button>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+
+<section class="latest-jobs pt-5 mt-5">
+    <h1>Featured Jobs Posted This Week</h1>
+    <div class="container pt-5 mt-5">
+        <div class="row">
+            @foreach (var item in Model.Jobs)
+            {<div class="container">
+                    <div class="row job-card mb-3 py-3">
+                        <div class="col-md-3">
+                            <img class="img-fluid img-thumbnail" src="~/Uploads/@Html.DisplayFor(m=>item.JobImage)" />
+                        </div>
+                        <div class="col-md-9 pt-3">
+                            <h5>Part Time</h5>
+                            <h3>@Html.DisplayFor(m => item.JobTitle)</h3>
+                            <br />
+                            <p>@item.User.UserName - Posted 6 months ago</p>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p>Location: 9 Remsen St Brooklyn, NY</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p>Category: @item.Category.CategoryType</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p>Salary: $18 - $25 per hour</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    @Html.ActionLink("Show Details", "Details", new { jobId = item.Id}, new {@class="btn btn-secondary mr-3" })
+                                    @Html.ActionLink("Apply For Job", "Apply", new { jobId = item.Id}, new {@class="btn btn-success mr-3" })
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="text-center py-5">
+        <a href="/jobs" class="">Browse Job Full List</a>
+    </div>
+</section>
+
+
+<section class="container testmonial-section pt-5">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-center m-auto text-center">
+                <i class="fa fa-quote-left fa-3x" style="color:#0c5c82;"></i>
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Carousel indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+                    <!-- Wrapper for carousel items -->
+                    <div class="carousel-inner">
+                        <div class="item carousel-item active">
+                            <div class="img-box"><img src="images/1.jpg" alt=""></div>
+                            <p class="testimonial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Idac bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet.</p>
+                            <p class="overview"><b>Paula Wilson</b>, Media Analyst</p>
+                        </div>
+                        <div class="item carousel-item">
+                            <div class="img-box"><img src="images/2.jpg" alt=""></div>
+                            <p class="testimonial">Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget nisi a mi suscipit tincidunt. Utmtc tempus dictum risus. Pellentesque viverra sagittis quam at mattis. Suspendisse potenti. Aliquam sit amet gravida nibh, facilisis gravida odio.</p>
+                            <p class="overview"><b>Antonio Moreno</b>, Web Developer</p>
+                        </div>
+                        <div class="item carousel-item">
+                            <div class="img-box"><img class="img-fluid" src="images/3.jpg" alt=""></div>
+                            <p class="testimonial">Phasellus vitae suscipit justo. Mauris pharetra feugiat ante id lacinia. Etiam faucibus mauris id tempor egestas. Duis luctus turpis at accumsan tincidunt. Phasellus risus risus, volutpat vel tellus ac, tincidunt fringilla massa. Etiam hendrerit dolor eget rutrum.</p>
+                            <p class="overview"><b>Michael Holz</b>, Seo Analyst</p>
+                        </div>
+                    </div>
+                    <!-- Carousel controls -->
+                    <a class="carousel-control left carousel-control-prev" href="#myCarousel" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a class="carousel-control right carousel-control-next" href="#myCarousel" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="start-job pt-5 mt-3 text-center">
+    <div class="container">
+                <h3>Get Start Your New Job With Us !</h3>
+                <p class="m-auto">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+
+                </p>
+                <a href="/Account/Register" class="btn btn-warning btn-lg mt-5">Create an Account</a>
+    </div>
+</section>

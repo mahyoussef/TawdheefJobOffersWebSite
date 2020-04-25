@@ -1,0 +1,55 @@
+﻿@model JobOffersWebsite.Models.Job
+
+@{
+    ViewBag.Title = "Job Details";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+    <section class="container job-details pt-5 mt-5">
+
+        <h2>Job Details</h2>
+
+        <div>
+            <h4> @Html.DisplayFor(model => model.JobTitle)</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Category.CategoryType)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Category.CategoryType)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.JobTitle)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JobTitle)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.JobContent)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JobContent)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.JobImage)
+                </dt>
+
+                <dd>
+                    <img src="~/Uploads/@Html.DisplayFor(model => model.JobImage)"
+                         class="img-thumbnail" style="width:78px; height:78px;" />
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id },new { @class="btn btn-outline-info mr-4"})
+            @Html.ActionLink("Back to List", "Index",null,new { @class="btn btn-secondary"})
+        </p>
+
+    </section>

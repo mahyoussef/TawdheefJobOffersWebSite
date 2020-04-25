@@ -1,0 +1,44 @@
+﻿@model IEnumerable<JobOffersWebsite.ViewModels.JobByPublisherViewModel>
+
+
+    <section class="container publisher-jobs pt-5 mt-5">
+        
+        @foreach(var gr in Model)
+        {   
+            <h2>@gr.JobTitle</h2>
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>
+                        User Name
+                    </th>
+                    <th>
+                        Message
+                    </th>
+                    <th>
+                        User CV
+                    </th>
+                    <th>
+                        Apply Date
+                    </th>
+                </tr>
+                @foreach(var item in gr.Items)
+                {
+                    <tr>
+                        <td>
+                            @item.User.UserName
+                        </td>
+                        <td>
+                            @item.Message
+                        </td>
+                        <td>
+                            @Html.ActionLink("Click here to download", "DownloadFile", "Home",new { fileName = @item.UserCv },null)
+                        </td>
+                        <td>
+                            @item.ApplyDate
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+
+    </section>

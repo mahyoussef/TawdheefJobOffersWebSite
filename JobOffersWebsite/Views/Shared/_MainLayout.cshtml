@@ -1,0 +1,127 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <title>@Page.Title</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/open-iconic/font/css/open-iconic-foundation.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+</head>
+<body>
+        <!--Navbar-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <a class="navbar-brand" href="/">
+                <img class="logo" src="~/images/logo-sm.png"/>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">
+                            <span class="fi-home" alt="Home"></span>
+                            Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/About">
+                            <span class="fi-magnifying-glass" alt="About"></span>
+                            About
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/Categories">
+                            <span class="fi-folder" alt="Categories"></span>
+                            Categories
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/Contact">
+                            <span class="fi-phone" alt="Contact-Us"></span>
+                            Contact Us
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    @using (Html.BeginForm("Search", "Home",FormMethod.Post))
+                    {
+                        <div class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" name="searchKey" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+                        </div>
+                    }
+
+                </ul>
+
+                <!--Partial Login-->
+                @Html.Partial("_Login")
+
+            </div>
+        </nav>
+        
+            @RenderBody()
+        
+        
+        <!--Footer-->
+<footer class="footer-head">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>
+                    <span class="fi-question-mark" alt="who is u?"></span>
+                    Who is Us
+                </h4>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h3>
+                    <span class="fi-globe" alt="who is u?"></span>
+                    Important Links
+                </h3>
+                <ul>
+                    <li><a href="#">Other Jobs</a></li>
+                    <li><a href="#">Other Jobs</a></li>
+                    <li><a href="#">Other Jobs</a></li>
+                    <li><a href="#">Other Jobs</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h3>
+                    <span class="fi-inbox" alt="who is u?"></span>
+                    Contact Us
+                </h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Youtube</a></li>
+                    <li><a href="#">Send us Message</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer-copyrights">
+        <p>COPYRIGHTS RESERVED FOR TAWDHEEF - 2020</p>
+    </div>
+</footer>
+        <script src="~/Scripts/jquery.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        @RenderSection("scripts", required: false)
+</body>
+</html>

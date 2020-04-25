@@ -1,0 +1,61 @@
+﻿@model JobOffersWebsite.Models.Job
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+    <section class="container delete-job py-5 my-5">
+
+        <h2>Delete Job</h2>
+
+        <h3>Are you sure you want to delete this?</h3>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Category.CategoryType)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Category.CategoryType)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.JobTitle)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JobTitle)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.JobContent)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.JobContent)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.JobImage)
+                </dt>
+
+                <dd>
+                    <img src="~/Uploads/@Html.DisplayFor(model => model.JobImage)"
+                         class="img-thumbnail" style="width:78px; height:78px;" />
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-danger mr-4" />
+                    @Html.ActionLink("Back to List", "Index",null,new { @class="btn btn-secondary"})
+                </div>
+            }
+        </div>
+
+    </section>
